@@ -4,30 +4,29 @@ tr-load-testing
 Class DataCompress may to use for compress string by gzip/bzip2 library.
 And you may to add a new filter.
 
-Example with gzip:
+#Example with gzip, init from file:
 
 require_relative 'compress'
 
 data = DataCompress.new
 data.init_file("access.log") # Load data from file
-#data.init_string(str) # Load data from string
 
 data.to_gzip # Compress using gzip
 
 print data.stat # Print statistics
 
-Example with bzip:
+#Example with bzip, init from string:
 
 require_relative 'compress'
 
 data = DataCompress.new
-data.init_string(str) 
+data.init_string("118.42.132.85 - - [18/May/2013:11:14:47 +0400] "GET / HTTP/1.0" 502 173") 
 
 data.to_bzip2
 
 print data.stat
 
-Example with your filter and gzip:
+#Example with your filter and gzip:
 
 require_relative 'compress'
 
@@ -48,11 +47,4 @@ data.to_gzip
 print data.stat 
 
 
-
-Example statistic output:
-
- Filter | Input size (KB) | Output size (KB) | Input/Output size | Time (s)
- fltr 1 |           1.101 |            1.025 |              1.00 |   0.00
- fltr 2 |           1.025 |            0.049 |             21.00 |   0.00
-   gzip |           0.049 |            0.057 |              0.00 |   0.00
 
